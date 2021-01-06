@@ -1,5 +1,5 @@
 {
-  "name": "express-boilerplate",
+  "name": "elevate-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "predeploy": "npm audit",
-    "deploy": "git push heroky master"
+    "deploy": "git push heroku master"
   },
   "keywords": [],
   "author": "",
