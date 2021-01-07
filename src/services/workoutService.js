@@ -12,8 +12,8 @@ const WorkoutService = {
     updateWorkout(knex, id, newWorkoutFields) {
       return knex("workouts").where({ id }).update(newWorkoutFields);
     },
-    getById(knex, userId) {
-      return knex.from("workouts").select("*").where("userId", userId).first();
+    getById(knex, userid) {
+      return knex.from("workouts").select("*").where("userid", userid).first();
     },
     deleteWorkout(knex, id) {
         return knex("workouts").where({ id }).delete();
