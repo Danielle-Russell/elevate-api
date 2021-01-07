@@ -27,6 +27,9 @@ app.use(function (req, res, next) {
   next();
 });
 
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
+
 app.use("/api/users", userRouter);
 
 app.use("/api/workouts", workoutRouter);
