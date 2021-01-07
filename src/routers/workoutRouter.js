@@ -71,7 +71,7 @@ WorkoutRouter.route("/:id")
   });
   WorkoutRouter.route("/:userId")
   .get((req, res, next) => {
-    WorkoutService.getById(req.app.get("db"), req.params.userId)
+    WorkoutService.getById(req.app.get("db"), req.params.userid)
       .then((Workouts) => {
         res.json(Workouts.map(sanitizeWorkout));
       })
