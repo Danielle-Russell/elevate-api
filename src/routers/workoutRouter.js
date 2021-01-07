@@ -24,8 +24,8 @@ WorkoutRouter.route("/")
   })
 
   .post(jsonParser, (req, res, next) => {
-    const { title, descr, tip } = req.body;
-    const newWorkout = { title, descr, tip };
+    const { title, descr, tip, userId } = req.body;
+    const newWorkout = { title, descr, tip, userId };
 
     // check for missing fields
     for (const [key, value] of Object.entries(newWorkout)) {
@@ -47,9 +47,10 @@ WorkoutRouter.route("/")
   });
 
 WorkoutRouter.route("/:id")
+
   .patch(jsonParser, (req, res, next) => {
-    const { title, descr, tip } = req.body;
-    const workoutToUpdate = { title, descr, tip };
+    const { title, descr, tip, userId } = req.body;
+    const workoutToUpdate = { title, descr, tip, userId };
 
     WorkoutService.updateWorkout(
       req.app.get("db"),
@@ -68,5 +69,13 @@ WorkoutRouter.route("/:id")
       })
       .catch(next);
   });
+  WorkoutRouter.route("/:userId")
+  .get((req, res, next) => {
+    WorkoutService.getById(req.app.get("db"), req.params.userId)
+      .then((Workouts) => {
+        res.json(Workouts.map(sanitizeWorkout));
+      })
+      .catch(next);
+  })
 
 module.exports = WorkoutRouter;
