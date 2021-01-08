@@ -61,7 +61,7 @@ PrefRouter.route("/:id")
       .catch(next);
   })
   .delete((req, res, next) => {
-    PrefService.deletePreference(req.app.get("db"), req.params.id)
+    PrefService.deletePreferences(req.app.get("db"), req.params.id)
       .then(() => {
         res.status(204).end();
       })
