@@ -72,10 +72,16 @@ WorkoutRouter.route("/:id")
   WorkoutRouter.route("/:userId")
   .get((req, res, next) => {
     WorkoutService.getById(req.app.get("db"), req.params.userid)
-      .then((Workouts) => {
-        res.json(Workouts.map(sanitizeWorkout));
-      })
-      .catch(next);
-  })
+    .then((Workouts) => {
+      if (!workouts) {
+        return res.status(404).json({
+          error: { message: `User doesn't exist` },
+        });
+      }
+      res.workouts = workouts;
+      next();
+    })
+    .catch(next);
+})
 
 module.exports = WorkoutRouter;
