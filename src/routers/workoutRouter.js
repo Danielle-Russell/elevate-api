@@ -84,7 +84,7 @@ WorkoutRouter.route("/:id")
       .catch(next);
   })
   .get((req, res, next) => {
-    res.json(sanitizeWorkouts(res.workouts));
+    res.json(sanitizeWorkout(res.workouts));
   });
 
 module.exports = WorkoutRouter;
