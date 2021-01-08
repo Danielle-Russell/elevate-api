@@ -72,7 +72,7 @@ WorkoutRouter.route("/:id")
   WorkoutRouter.route("/:userId")
   .get((req, res, next) => {
     WorkoutService.getById(req.app.get("db"), req.params.userid)
-    .then((Workouts) => {
+    .then((workouts) => {
       if (!workouts) {
         return res.status(404).json({
           error: { message: `User doesn't exist` },
