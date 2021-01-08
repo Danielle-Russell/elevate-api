@@ -5,6 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const userRouter = require("./routers/userRouter");
 const workoutRouter = require("./routers/workoutRouter");
+const prefRouter = require("./routers/prefRouter");
 
 const app = express();
 
@@ -33,6 +34,9 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 app.use("/api/users", userRouter);
 
 app.use("/api/workouts", workoutRouter);
+
+app.use("/api/preferences", prefRouter);
+
 
 
 app.use(function errorHandler(error, req, res, next) {
