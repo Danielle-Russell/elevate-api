@@ -69,19 +69,22 @@ WorkoutRouter.route("/:id")
       })
       .catch(next);
   });
-  WorkoutRouter.route("/:userId")
-  .get((req, res, next) => {
+  WorkoutRouter.route("/:userid")
+  .all((req, res, next) => {
     WorkoutService.getById(req.app.get("db"), req.params.userid)
-    .then((workouts) => {
-      if (!workouts) {
-        return res.status(404).json({
-          error: { message: `User doesn't exist` },
-        });
-      }
-      res.workouts = workouts;
-      next();
-    })
-    .catch(next);
-})
+      .then((workouts) => {
+        if (!workouts) {
+          return res.status(404).json({
+            error: { message: `User doesn't exist` },
+          });
+        }
+        res.workouts = workouts;
+        next();
+      })
+      .catch(next);
+  })
+  .get((req, res, next) => {
+    res.json(sanitizeWorkouts(res.workouts));
+  });
 
 module.exports = WorkoutRouter;
