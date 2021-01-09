@@ -28,8 +28,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 app.use("/api/users", userRouter);
 
@@ -37,17 +36,16 @@ app.use("/api/workouts", workoutRouter);
 
 app.use("/api/preferences", prefRouter);
 
-
-
 app.use(function errorHandler(error, req, res, next) {
   let response;
-  /*if (NODE_ENV === "production") {
+  if (NODE_ENV === "production") {
     response = { error: { message: "server error" } };
-  } else {*/
+  } else {
     console.error(error);
     response = { message: error.message, error };
-  
-  res.status(500).json(response);
+
+    res.status(500).json(response);
+  }
 });
 
 module.exports = app;
