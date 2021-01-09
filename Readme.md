@@ -62,33 +62,6 @@ Update workout
 
 Delete workout
 
-### Workouts
-
-#### GET /api/workouts
-
-Returns all workouts
-
-#### GET /api/workouts/:userid
-
-Returns a list of all workouts logged for a certain user account
-
-#### POST /api/workouts
-
-| Field  | Required | Description                                                            | Type |
-| ------ | -------- | ---------------------------------------------------------------------- | ---- |
-| userid | Yes      | String- Relates to previously created user account (Foreign Key users) | All  |
-| title  | Yes      | String                                                                 | All  |
-| descr  | Yes      | String                                                                 | All  |
-| tip    | Yes      | String                                                                 | All  |
-
-#### PATCH api/workouts/:id
-
-Update workout
-
-#### DELETE api/workouts/:id
-
-Delete workout
-
 ### Preferences
 
 #### GET /api/preferences/:userid
