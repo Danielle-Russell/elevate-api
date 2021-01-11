@@ -41,7 +41,7 @@ Delete user
 
 Returns all workouts
 
-#### GET /api/workouts/:userid
+#### GET /api/workouts/:useremail
 
 Returns a list of all workouts logged for a certain user account
 
@@ -64,7 +64,7 @@ Delete workout
 
 ### Preferences
 
-#### GET /api/preferences/:userid
+#### GET /api/preferences/:useremail
 
 Returns a list of all preferences logged for a certain user account
 

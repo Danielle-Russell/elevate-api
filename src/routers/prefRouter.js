@@ -20,41 +20,45 @@ const sanitizePref = (pref) => ({
 });
 
 PrefRouter.route("/")
+.post(jsonParser, (req, res, next) => {
+  const { userid, name, age, weight, height, goals, time, days } = req.body;
+  const newPref = { userid, name, age, weight, height, goals, time, days };
 
-  .post(jsonParser, (req, res, next) => {
-    const { userid, name, age, weight, height, goals, time, days } = req.body;
-    const newPref = { userid, name, age, weight, height, goals, time, days };
-
-    // check for missing fields
-    for (const [key, value] of Object.entries(newPref)) {
-      if (value == null) {
-        return res.status(400).json({
-          error: { message: `Missing '${key}' in request body` },
-        });
-      }
+  // check for missing fields
+  for (const [key, value] of Object.entries(newPref)) {
+    if (value == null) {
+      return res.status(400).json({
+        error: { message: `Missing '${key}' in request body` },
+      });
     }
+  }
 
-    PrefService.insertPreference(req.app.get("db"), newPref)
-      .then((pref) => {
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `${pref.id}`))
-          .json(sanitizePref(pref));
-      })
-      .catch(next);
-  });
+  PrefService.insertPreference(req.app.get("db"), newPref)
+    .then((pref) => {
+      res
+        .status(201)
+        .location(path.posix.join(req.originalUrl, `${pref.id}`))
+        .json(sanitizePref(pref));
+    })
+    .catch(next);
+});
 
 PrefRouter.route("/:id")
 
   .patch(jsonParser, (req, res, next) => {
     const { userid, name, age, weight, height, goals, time, days } = req.body;
-    const prefToUpdate = { userid, name, age, weight, height, goals, time, days };
+    const prefToUpdate = {
+      userid,
+      name,
+      age,
+      weight,
+      height,
+      goals,
+      time,
+      days,
+    };
 
-    PrefService.updatePreference(
-      req.app.get("db"),
-      req.params.id,
-      prefToUpdate
-    )
+    PrefService.updatePreference(req.app.get("db"), req.params.id, prefToUpdate)
       .then(() => {
         res.status(204).end();
       })

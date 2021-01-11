@@ -69,7 +69,7 @@ WorkoutRouter.route("/:id")
       })
       .catch(next);
   });
-  WorkoutRouter.route("/:userid")
+WorkoutRouter.route("/:userid")
   .all((req, res, next) => {
     WorkoutService.getById(req.app.get("db"), req.params.userid)
       .then((workouts) => {
